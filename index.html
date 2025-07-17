@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+FileName: MultipleFiles/casse-1.html
+FileContents: <!DOCTYPE html>
 
 <html lang="en">
 <head>
@@ -360,6 +361,30 @@
             user-select: none;
             position: relative; /* Added for absolute positioning of wishlist button */
         }
+
+        /* --- START ADDITION FOR RATING CSS --- */
+        .product-rating {
+            position: absolute;
+            top: 10px; /* Adjust as needed */
+            left: 10px; /* Adjust as needed */
+            background: rgba(0, 0, 0, 0.6); /* Darker background for contrast */
+            color: white;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 10; /* Ensure it's above other elements if needed */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .product-rating .material-icons {
+            font-size: 1.1rem; /* Size of the star icon */
+            color: gold; /* Color of the star icon */
+        }
+        /* --- END ADDITION FOR RATING CSS --- */
+
         .product-card-header {
             cursor: pointer;
             width: 100%;
@@ -951,7 +976,7 @@
             justify-content: center;
             gap: 8px;
             padding: 15px 10px;
-            min-height: 50px;
+            min-height: 100px;
             font-size: 0.9rem;
             font-weight: 600;
             background: #f0f0f0; /* Light background for method buttons */
@@ -1011,6 +1036,29 @@
         #qrScannerOverlay #cancelQrScanBtn:hover {
             background: #d32f2f;
         }
+
+        /* --- ADDED/MODIFIED CSS FOR QR CODE IMAGE SIZE --- */
+        #qrScannerOverlay .qr-code-image {
+            max-width: 60%; /* Adjust this percentage to make the QR code smaller. */
+            height: auto;     /* Ensures the image scales proportionally without distortion. */
+            display: block;   /* Makes it a block element so margin: auto works for centering. */
+            margin: 20px auto; /* Centers the image horizontally and adds vertical spacing. */
+            border: 3px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Media query for smaller screens (phones) */
+        @media (max-width: 767px) {
+            #qrScannerOverlay .qr-code-image {
+                max-width: 75%; /* You might want it slightly larger on small screens to be scannable */
+            }
+            #qrScannerOverlay .qr-scanner-content {
+                padding: 25px; /* Adjust padding for smaller screens */
+                width: 95%; /* Allow modal content to take more width on small screens */
+            }
+        }
+        /* --- END ADDED/MODIFIED CSS --- */
 
         /* Order Confirmation Overlay Specific Styles */
         #orderConfirmationOverlay.show {
@@ -1262,6 +1310,8 @@ nav a:hover, button:hover {
 <p id="detail-product-color"></p>
 <p id="detail-product-description"></p>
 <div class="price-info" id="detail-product-price"></div>
+<!-- The rating-section div was here, but it's not needed for the product detail page if ratings are on cards -->
+<!-- <div class="rating-section"></div> -->
 <div class="quantity-controls">
 <button aria-label="Decrease quantity" id="detail-btn-decrease" type="button">-</button>
 <span class="quantity-value" id="detail-quantity-value">1</span>
@@ -1285,13 +1335,13 @@ nav a:hover, button:hover {
         <p>Total Amount: <span id="payment-options-total">₹0</span></p>
         <div class="payment-methods-grid">
             <button class="primary-btn payment-method-btn" data-method="gpay">
-                <img src="gpay.jpg" alt="Google Pay" class="payment-icon"> G-Pay
+                <img src="images/payment/gpay.png" alt="Google Pay" class="payment-icon"> G-Pay
             </button>
             <button class="primary-btn payment-method-btn" data-method="paytm">
-                <img src="paytm.jpg" alt="Paytm" class="payment-icon"> Paytm
+                <img src="images/payment/paytm.png" alt="Paytm" class="payment-icon"> Paytm
             </button>
             <button class="primary-btn payment-method-btn" data-method="phonepe">
-                <img src="phonepe.jpg" alt="PhonePe" class="payment-icon"> PhonePe
+                <img src="images/payment/phonepe.png" alt="PhonePe" class="payment-icon"> PhonePe
             </button>
             <button class="primary-btn payment-method-btn" data-method="cod">Cash on Delivery</button>
         </div>
@@ -1303,7 +1353,7 @@ nav a:hover, button:hover {
 <div aria-labelledby="qr-scanner-title" aria-modal="true" class="modal-overlay hidden" id="qrScannerOverlay" role="dialog">
     <div class="qr-scanner-content">
         <h3 id="qr-scanner-title">Scan to Pay</h3>
-        <img src="gpay.jpg" alt="QR Code" class="qr-code-image">
+        <img src="images/payment/qr-code.png" alt="QR Code" class="qr-code-image">
         <p>Payment will be confirmed in <span id="qr-countdown">30</span> seconds.</p>
         <button class="primary-btn" id="paymentDoneBtn">Payment Done (Simulated)</button>
         <button class="primary-btn btn-cancel" id="cancelQrScanBtn">Cancel</button>
@@ -1325,7 +1375,7 @@ nav a:hover, button:hover {
             "use strict";
 
             // Data for products with alt text and detailed description
-                 const productData = {
+               const productData = {
                 accessories: [
                     { name: "Hat", color: "White", price: 1700, alt: "White hat on display", description: "A stylish white hat, perfect for sunny days or adding a chic touch to any outfit. Made from breathable cotton blend for comfort.", imageSrc: "Images/Accessories/white hat.jpg" },
                     { name: "Bracelet", color: "Black", price: 199, alt: "Black bracelet on display", description: "Minimalist black beaded bracelet, ideal for daily wear. Made with durable elastic string and polished onyx beads." , imageSrc: "Images/Accessories/bracelet.jpg"},
@@ -1357,6 +1407,8 @@ nav a:hover, button:hover {
                     { name: "Puma Casual", color: "Grey", price: 700, alt: "Grey Puma casual shoes", description: "Stylish grey Puma casual shoes, combining athletic comfort with urban fashion. Perfect for a relaxed yet trendy everyday look.", imageSrc: "Images/shoes/casual3.jpg" }
                 ]
             };
+
+
 
             // Simulated user data (static for this example)
             const userProfile = {
@@ -1567,6 +1619,16 @@ nav a:hover, button:hover {
                 card.classList.add("product-card");
                 card.setAttribute("tabindex", "0");
                 card.setAttribute("aria-label", `${product.name}, color ${product.color}, price ₹${product.price}`);
+
+                // --- START ADDITION FOR RATING ---
+                const ratingDisplay = document.createElement("div");
+                ratingDisplay.classList.add("product-rating");
+                ratingDisplay.innerHTML = `
+                    <span class="material-icons" aria-hidden="true">star</span>
+                    <span class="rating-value">4.0</span>
+                `;
+                card.appendChild(ratingDisplay); // Append rating to the card
+                // --- END ADDITION FOR RATING ---
 
                 const cardHeader = document.createElement("div");
                 cardHeader.classList.add("product-card-header");
@@ -2597,8 +2659,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // === RATING SYSTEM ===
+  // This part is now handled by the product card generation in JavaScript
+  // and the .product-rating CSS. The old rating-section div is no longer needed.
   const ratingSection = document.querySelector(".rating-section");
   if (ratingSection) {
+    // This block will now likely not execute as .rating-section is removed from HTML
+    // or is not the primary way ratings are displayed.
     ratingSection.innerHTML = "<p>⭐⭐⭐⭐☆ (4.0 avg)</p><small>Customer reviews coming soon.</small>";
   }
 
