@@ -245,8 +245,8 @@
         }
 
         /* Form section */
-        .container {
-            background: #8897AA; /* Solid background for login form */
+        /* .container {
+            background: #8897AA;
             border-radius: 24px;
             padding: 32px 24px;
             max-width: 400px;
@@ -263,7 +263,7 @@
             font-weight: 700;
             color: #d1d5db;
             user-select: none;
-        }
+        } */
         input[type="email"], input[type="number"], input[type="text"], input[type="tel"] {
             width: 100%;
             padding: 14px 16px;
@@ -649,7 +649,7 @@
 
 
         /* Dashboard specific styles */
-        .dashboard-section {
+        /* .dashboard-section {
             background: rgba(255 255 255 / 0.1);
             border-radius: 24px;
             padding: 32px 24px;
@@ -706,7 +706,7 @@
             color: blue;
             outline-offset: 3px;
             outline: 3px solid #b91c1c;
-        }
+        } */
         /* Style for editable profile fields */
         .profile-field-container {
             display: flex;
@@ -935,6 +935,106 @@
             background: black;
             border-radius: 10px;
         }
+
+        /* Payment Options Grid */
+        .payment-methods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .payment-method-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 15px 10px;
+            min-height: 100px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            background: #f0f0f0; /* Light background for method buttons */
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+        .payment-method-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .payment-method-btn .payment-icon {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        /* QR Scanner Overlay Specific Styles */
+        #qrScannerOverlay.show {
+            background: linear-gradient(135deg, #4CAF50, #8BC34A); /* Green background */
+        }
+        #qrScannerOverlay .qr-scanner-content {
+            background: rgba(255 255 255 / 0.9); /* Slightly transparent white */
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            color: #333; /* Darker text for readability on light background */
+        }
+        #qrScannerOverlay h3 {
+            color: #333;
+            margin-top: 0;
+        }
+        #qrScannerOverlay p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+        #qrScannerOverlay button {
+            margin-top: 15px;
+        }
+        #qrScannerOverlay #paymentDoneBtn {
+            background: #2196F3; /* Blue for "Payment Done" */
+        }
+        #qrScannerOverlay #paymentDoneBtn:hover {
+            background: #1976D2;
+        }
+        #qrScannerOverlay #cancelQrScanBtn {
+            background: #f44336; /* Red for "Cancel" */
+        }
+        #qrScannerOverlay #cancelQrScanBtn:hover {
+            background: #d32f2f;
+        }
+
+        /* Order Confirmation Overlay Specific Styles */
+        #orderConfirmationOverlay.show {
+            background: linear-gradient(135deg, #4CAF50, #8BC34A); /* Green background */
+        }
+        #orderConfirmationOverlay .modal-content {
+            background: rgba(255 255 255 / 0.9);
+            backdrop-filter: blur(10px);
+            color: #333;
+        }
+        #orderConfirmationOverlay h3 {
+            color: #333;
+        }
+        #orderConfirmationOverlay #confirmation-message {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #555;
+        }
+        #orderConfirmationOverlay #continueShoppingBtn {
+            background: #2196F3;
+        }
+        #orderConfirmationOverlay #continueShoppingBtn:hover {
+            background: #1976D2;
+        }
     
 </style>
 
@@ -1039,7 +1139,7 @@ nav a:hover, button:hover {
 </div>
 </div>
 <main>
-<section aria-label="Login form complete your details" class="container active" id="home" role="region">
+<section aria-label="Login form complete your details" class="active" id="home" role="region">
 <h2>Email or Phone Number</h2>
 <div class="login-buttons-container">
 <button class="primary-btn" id="btn-phone" type="button">Phone Number</button>
@@ -1113,10 +1213,10 @@ nav a:hover, button:hover {
 <h2>User Dashboard</h2>
 <div aria-label="User profile picture" class="profile-photo-area" role="img">
 <span class="material-icons">account_circle</span>
-<!-- You can replace the span with an <img> tag for a real photo -->
+<!-- You can replace the span with an img tag for a real photo -->
 <!-- <img src="https://placehold.co/120x120/3b82f6/ffffff?text=User" alt="User Profile Photo"> -->
 </div>
-<div class="dashboard-section">
+<div>
 <h3>User Details</h3>
 <div class="profile-field-container">
 <label for="edit-name">Name:</label>
@@ -1138,13 +1238,13 @@ nav a:hover, button:hover {
 <button class="primary-btn btn-cancel hidden" id="cancelEditBtn">Cancel</button>
 </div>
 </div>
-<div class="dashboard-section">
+<div>
 <h3>Order History</h3>
 <ul id="order-history-list">
 <!-- Orders will be loaded here -->
 </ul>
 </div>
-<div class="dashboard-section">
+<div>
 <h3>Wishlist</h3>
 <ul id="wishlist-list">
 <!-- Wishlist items will be loaded here -->
@@ -1178,6 +1278,47 @@ nav a:hover, button:hover {
 </section>
 </main>
 
+<!-- Payment Options Modal -->
+<div aria-labelledby="payment-options-title" aria-modal="true" class="modal-overlay hidden" id="paymentOptionsModal" role="dialog">
+    <div class="modal-content">
+        <h3 id="payment-options-title">Choose Payment Method</h3>
+        <p>Total Amount: <span id="payment-options-total">₹0</span></p>
+        <div class="payment-methods-grid">
+            <button class="primary-btn payment-method-btn" data-method="gpay">
+                <img src="images/payment/gpay.png" alt="Google Pay" class="payment-icon"> G-Pay
+            </button>
+            <button class="primary-btn payment-method-btn" data-method="paytm">
+                <img src="images/payment/paytm.png" alt="Paytm" class="payment-icon"> Paytm
+            </button>
+            <button class="primary-btn payment-method-btn" data-method="phonepe">
+                <img src="images/payment/phonepe.png" alt="PhonePe" class="payment-icon"> PhonePe
+            </button>
+            <button class="primary-btn payment-method-btn" data-method="cod">Cash on Delivery</button>
+        </div>
+        <button class="primary-btn btn-cancel" id="cancelPaymentOptionsBtn">Cancel</button>
+    </div>
+</div>
+
+<!-- QR Code Scanner Overlay -->
+<div aria-labelledby="qr-scanner-title" aria-modal="true" class="modal-overlay hidden" id="qrScannerOverlay" role="dialog">
+    <div class="qr-scanner-content">
+        <h3 id="qr-scanner-title">Scan to Pay</h3>
+        <img src="images/payment/qr-code.png" alt="QR Code" class="qr-code-image">
+        <p>Payment will be confirmed in <span id="qr-countdown">30</span> seconds.</p>
+        <button class="primary-btn" id="paymentDoneBtn">Payment Done (Simulated)</button>
+        <button class="primary-btn btn-cancel" id="cancelQrScanBtn">Cancel</button>
+    </div>
+</div>
+
+<!-- Order Confirmation Overlay -->
+<div aria-labelledby="order-confirmation-title" aria-modal="true" class="modal-overlay hidden" id="orderConfirmationOverlay" role="dialog">
+    <div class="modal-content">
+        <h3 id="order-confirmation-title">Order Confirmed!</h3>
+        <p id="confirmation-message">Your order has been successfully placed.</p>
+        <button class="primary-btn" id="continueShoppingBtn">Continue Shopping</button>
+    </div>
+</div>
+
 <script>
 
         (() => {
@@ -1186,34 +1327,34 @@ nav a:hover, button:hover {
             // Data for products with alt text and detailed description
                  const productData = {
                 accessories: [
-                    { name: "Hat", color: "White", price: 1700, alt: "White hat on display", description: "A stylish white hat, perfect for sunny days or adding a chic touch to any outfit. Made from breathable cotton blend for comfort.", imageSrc: "Images/Accessories/white hat.jpg" },
-                    { name: "Bracelet", color: "Black", price: 199, alt: "Black bracelet on display", description: "Minimalist black beaded bracelet, ideal for daily wear. Made with durable elastic string and polished onyx beads." , imageSrc: "Images/Accessories/bracelet.jpg"},
-                    { name: "Belt", color: "Brown", price: 159, alt: "Brown belt on display", description: "Classic brown leather belt with a sleek silver buckle. A versatile accessory for both casual and formal attire." , imageSrc: "Images/Accessories/belt.jpg"},
-                    { name: "Gold Plated Chain", color: "Gold", price: 350, alt: "Gold plated chain necklace", description: "Elegant gold-plated chain necklace, perfect for layering or wearing solo. Hypoallergenic material ensures comfortable wear.", imageSrc: "Images/Accessories/chain.jpg" },
-                    { name: "Coolers", color: "Gold and Black", price: 580, alt: "Gold and black coolers", description: "Trendy gold and black sunglasses offering UV400 protection. Lightweight frame designed for maximum comfort and style." , imageSrc:"Images/Accessories/coolers.jpg"},
-                    { name: "Ring", color: "Black", price: 100, alt: "Black ring", description: "Modern black stainless steel ring, an understated accessory that adds an edgy touch to your look. Durable and scratch-resistant.", imageSrc: "Images/Accessories/ring.jpg"},
-                    { name: "Wallet", color: "Blue", price: 800, alt: "Blue wallet", description: "Compact blue bi-fold wallet made from premium synthetic leather. Features multiple card slots, a coin pouch, and a bill compartment." , imageSrc: "Images/Accessories/wallet.jpg"},
-                    { name: "Watch", color: "White", price: 600, alt: "White wrist watch", description: "Sleek white minimalist wristwatch with a comfortable silicone strap. Water-resistant and perfect for everyday elegance." , imageSrc: "Images/Accessories/watch.jpg"}
+                    { name: "Hat", color: "White", price: 1700, alt: "White hat on display", description: "A stylish white hat, perfect for sunny days or adding a chic touch to any outfit. Made from breathable cotton blend for comfort.", imageSrc: "images/accessories/hat.png" },
+                    { name: "Bracelet", color: "Black", price: 199, alt: "Black bracelet on display", description: "Minimalist black beaded bracelet, ideal for daily wear. Made with durable elastic string and polished onyx beads." , imageSrc: "images/accessories/bracelet.jpg"},
+                    { name: "Belt", color: "Brown", price: 159, alt: "Brown belt on display", description: "Classic brown leather belt with a sleek silver buckle. A versatile accessory for both casual and formal attire." , imageSrc: "images/accessories/belt.jpg"},
+                    { name: "Gold Plated Chain", color: "Gold", price: 350, alt: "Gold plated chain necklace", description: "Elegant gold-plated chain necklace, perfect for layering or wearing solo. Hypoallergenic material ensures comfortable wear.", imageSrc: "images/accessories/gold-chain.png" },
+                    { name: "Coolers", color: "Gold and Black", price: 580, alt: "Gold and black coolers", description: "Trendy gold and black sunglasses offering UV400 protection. Lightweight frame designed for maximum comfort and style." , imageSrc:"images/accessories/coolers.jpg"},
+                    { name: "Ring", color: "Black", price: 100, alt: "Black ring", description: "Modern black stainless steel ring, an understated accessory that adds an edgy touch to your look. Durable and scratch-resistant.", imageSrc: "images/accessories/ring.jpg"},
+                    { name: "Wallet", color: "Blue", price: 800, alt: "Blue wallet", description: "Compact blue bi-fold wallet made from premium synthetic leather. Features multiple card slots, a coin pouch, and a bill compartment." , imageSrc: "images/accessories/wallet.png"},
+                    { name: "Watch", color: "White", price: 600, alt: "White wrist watch", description: "Sleek white minimalist wristwatch with a comfortable silicone strap. Water-resistant and perfect for everyday elegance." , imageSrc: "images/accessories/watch.jpg"}
                 ],
                 dresses: [
-                    { name: "Denim Shirt", color: "Black", price: 700, alt: "Black denim shirt", description: "A classic black denim shirt, perfect for a casual yet fashionable look. Made from soft, durable denim fabric.", imageSrc: "Images/shirts/men-s-denim-shirts.jpg" },
-                    { name: "Fit Shirt", color: "Black", price: 499, alt: "Black fit shirt", description: "Tailored fit black shirt, designed to flatter your physique. Crafted from a comfortable stretch fabric, ideal for formal and casual occasions.", imageSrc: "Images/shirts/fit shirt.jpg" },
-                    { name: "Baggy T-Shirt", color: "Printed", price: 399, alt: "Printed baggy t-shirt", description: "Comfortable oversized t-shirt with a unique graphic print. Made from soft, breathable cotton, perfect for a relaxed street-style vibe.", imageSrc: "Images/shirts/baggy t shirt.jpg" },
-                    { name: "Cotton Shirt", color: "Pale Blue", price: 800, alt: "Pale blue cotton shirt", description: "Lightweight pale blue cotton shirt, perfect for warm weather. Its breathable fabric ensures comfort all day long.", imageSrc: "Images/shirts/cotton blue.jpg" },
-                    { name: "Party Wear", color: "Green", price: 580, alt: "Green party wear shirt", description: "Vibrant green party wear shirt with subtle sheen. Designed for a striking presence at any celebration or evening event.", imageSrc: "Images/shirts/cotton.png" },
-                    { name: "Goa Shirt", color: "White and Orange", price: 700, alt: "White and orange Goa shirt", description: "Relaxed fit white and orange patterned Goa shirt. Lightweight and airy, perfect for beach days or tropical getaways.", imageSrc: "Images/shirts/goa shirt.jpg" },
-                    { name: "Cotton Halfhand", color: "Sky Blue", price: 700, alt: "Sky blue cotton halfhand", description: "Comfortable sky blue cotton half-sleeve shirt. A wardrobe staple for casual outings, offering both style and ease.", imageSrc: "Images/shirts/cotton halfhand.jpg" },
-                    { name: "Double Packetshirt", color: "Brown", price: 600, alt: "Brown double packet shirt", description: "Rugged brown double-pocket shirt, combining utility with a trendy aesthetic. Made from sturdy cotton blend, ideal for outdoor adventures.", imageSrc: "Images/shirts/double.jpg" }
+                    { name: "Denim Shirt", color: "Black", price: 700, alt: "Black denim shirt", description: "A classic black denim shirt, perfect for a casual yet fashionable look. Made from soft, durable denim fabric.", imageSrc: "images/dresses/denim-shirt.jpg" },
+                    { name: "Fit Shirt", color: "Black", price: 499, alt: "Black fit shirt", description: "Tailored fit black shirt, designed to flatter your physique. Crafted from a comfortable stretch fabric, ideal for formal and casual occasions.", imageSrc: "images/dresses/fit-shirt.jpg" },
+                    { name: "Baggy T-Shirt", color: "Printed", price: 399, alt: "Printed baggy t-shirt", description: "Comfortable oversized t-shirt with a unique graphic print. Made from soft, breathable cotton, perfect for a relaxed street-style vibe.", imageSrc: "images/dresses/baggy-tshirt.jpg" },
+                    { name: "Cotton Shirt", color: "Pale Blue", price: 800, alt: "Pale blue cotton shirt", description: "Lightweight pale blue cotton shirt, perfect for warm weather. Its breathable fabric ensures comfort all day long.", imageSrc: "images/dresses/cotton-shirt.jpg" },
+                    { name: "Party Wear", color: "Green", price: 580, alt: "Green party wear shirt", description: "Vibrant green party wear shirt with subtle sheen. Designed for a striking presence at any celebration or evening event.", imageSrc: "images/dresses/party-wear.jpg" },
+                    { name: "Goa Shirt", color: "White and Orange", price: 700, alt: "White and orange Goa shirt", description: "Relaxed fit white and orange patterned Goa shirt. Lightweight and airy, perfect for beach days or tropical getaways.", imageSrc: "images/dresses/goa-shirt.jpg" },
+                    { name: "Cotton Halfhand", color: "Sky Blue", price: 700, alt: "Sky blue cotton halfhand", description: "Comfortable sky blue cotton half-sleeve shirt. A wardrobe staple for casual outings, offering both style and ease.", imageSrc: "images/dresses/cotton-halfhand.jpg" },
+                    { name: "Double Packetshirt", color: "Brown", price: 600, alt: "Brown double packet shirt", description: "Rugged brown double-pocket shirt, combining utility with a trendy aesthetic. Made from sturdy cotton blend, ideal for outdoor adventures.", imageSrc: "images/dresses/double-packet-shirt.jpg" }
                 ],
                 shoes: [
-                    { name: "Lofers", color: "Brown", price: 300, alt: "Brown loafers", description: "Comfortable brown loafers for a sophisticated casual look. Made with a soft lining and durable sole for all-day wear.", imageSrc: "Images/shoes/lofer.jpg" },
-                    { name: "Casual Shoes", color: "Black", price: 499, alt: "Black casual shoes", description: "Versatile black casual shoes, perfect for everyday wear. Lightweight design with a cushioned sole for ultimate comfort.", imageSrc: "Images/shoes/casual1.jpg" },
-                    { name: "Sports Shoes (White)", color: "White", price: 999, alt: "White sports shoes", description: "High-performance white sports shoes designed for optimal comfort and support during physical activities. Features breathable mesh and responsive cushioning.", imageSrc: "Images/shoes/basketball.jpg" },
-                    { name: "Sports Shoes (White/Red)", color: "White and Red", price: 999, alt: "White and red sports shoes", description: "Dynamic white and red sports shoes for an energetic look. Engineered for agility and comfort, suitable for various sports.", imageSrc: "Images/shoes/sports.jpg" },
-                    { name: "Formal Shoes", color: "Brown & Black", price: 600, alt: "Brown and black formal shoes", description: "Elegant brown and black formal shoes, perfect for business or special occasions. Crafted with a polished finish for a distinguished appearance.", imageSrc: "Images/shoes/formal.jpg" },
-                    { name: "Spike Shoes", color: "White and Orange", price: 900, alt: "White and orange spike shoes", description: "Aggressive white and orange spike shoes, designed for enhanced grip and performance on turf. Ideal for various outdoor sports.", imageSrc: "Images/shoes/spike.jpg" },
-                    { name: "Boots", color: "Black", price: 500, alt: "Black boots", description: "Durable black boots, offering both style and protection. Features a sturdy sole and comfortable fit for all-day wear in tough conditions.", imageSrc: "Images/shoes/boots1.jpg" },
-                    { name: "Puma Casual", color: "Grey", price: 700, alt: "Grey Puma casual shoes", description: "Stylish grey Puma casual shoes, combining athletic comfort with urban fashion. Perfect for a relaxed yet trendy everyday look.", imageSrc: "Images/shoes/casual3.jpg" }
+                    { name: "Lofers", color: "Brown", price: 300, alt: "Brown loafers", description: "Comfortable brown loafers for a sophisticated casual look. Made with a soft lining and durable sole for all-day wear.", imageSrc: "images/shoes/lofers.jpg" },
+                    { name: "Casual Shoes", color: "Black", price: 499, alt: "Black casual shoes", description: "Versatile black casual shoes, perfect for everyday wear. Lightweight design with a cushioned sole for ultimate comfort.", imageSrc: "images/shoes/casual-shoes.jpg" },
+                    { name: "Sports Shoes (White)", color: "White", price: 999, alt: "White sports shoes", description: "High-performance white sports shoes designed for optimal comfort and support during physical activities. Features breathable mesh and responsive cushioning.", imageSrc: "images/shoes/sports-shoes-white.jpg" },
+                    { name: "Sports Shoes (White/Red)", color: "White and Red", price: 999, alt: "White and red sports shoes", description: "Dynamic white and red sports shoes for an energetic look. Engineered for agility and comfort, suitable for various sports.", imageSrc: "images/shoes/sports-shoes-white-red.jpg" },
+                    { name: "Formal Shoes", color: "Brown & Black", price: 600, alt: "Brown and black formal shoes", description: "Elegant brown and black formal shoes, perfect for business or special occasions. Crafted with a polished finish for a distinguished appearance.", imageSrc: "images/shoes/formal-shoes.jpg" },
+                    { name: "Spike Shoes", color: "White and Orange", price: 900, alt: "White and orange spike shoes", description: "Aggressive white and orange spike shoes, designed for enhanced grip and performance on turf. Ideal for various outdoor sports.", imageSrc: "images/shoes/spike-shoes.jpg" },
+                    { name: "Boots", color: "Black", price: 500, alt: "Black boots", description: "Durable black boots, offering both style and protection. Features a sturdy sole and comfortable fit for all-day wear in tough conditions.", imageSrc: "images/shoes/boots.jpg" },
+                    { name: "Puma Casual", color: "Grey", price: 700, alt: "Grey Puma casual shoes", description: "Stylish grey Puma casual shoes, combining athletic comfort with urban fashion. Perfect for a relaxed yet trendy everyday look.", imageSrc: "images/shoes/puma-casual.jpg" }
                 ]
             };
 
@@ -1312,6 +1453,24 @@ nav a:hover, button:hover {
             const detailAddToCartBtn = document.getElementById("detail-add-to-cart-btn");
             const detailBuyNowBtn = document.getElementById("detail-buy-now-btn");
             const detailAddToWishlistBtn = document.getElementById("detail-add-to-wishlist-btn");
+
+            // Payment Options Modal elements
+            const paymentOptionsModal = document.getElementById("paymentOptionsModal");
+            const paymentOptionsTotal = document.getElementById("payment-options-total");
+            const paymentMethodBtns = document.querySelectorAll(".payment-method-btn");
+            const cancelPaymentOptionsBtn = document.getElementById("cancelPaymentOptionsBtn");
+
+            // QR Scanner Overlay elements
+            const qrScannerOverlay = document.getElementById("qrScannerOverlay");
+            const qrCountdown = document.getElementById("qr-countdown");
+            const paymentDoneBtn = document.getElementById("paymentDoneBtn");
+            const cancelQrScanBtn = document.getElementById("cancelQrScanBtn");
+            let countdownInterval;
+
+            // Order Confirmation Overlay elements
+            const orderConfirmationOverlay = document.getElementById("orderConfirmationOverlay");
+            const confirmationMessage = document.getElementById("confirmation-message");
+            const continueShoppingBtn = document.getElementById("continueShoppingBtn");
 
 
             // Persist all application state (cart, login, userProfile including wishlist) in localStorage
@@ -1776,17 +1935,15 @@ nav a:hover, button:hover {
                     showNotification("Your cart is empty. Add items before checkout.");
                     return;
                 }
-                const confirmationMessage = isBuyNow ? "Proceed with instant purchase?" : "Proceed to checkout with current items?";
-                const confirmed = await showConfirmation(confirmationMessage);
-                if (confirmed) {
-                    const purchasedItems = cart.map(item => `${item.name} (x${item.quantity})`).join(', ');
-                    showNotification(`Purchase successful! Items: ${purchasedItems}.`);
-                    // Clear cart after checkout
-                    cart = [];
-                    saveState();
-                    updateCartCount();
-                    showSection(isLoggedIn ? "dresses" : "home"); // Redirect to product listing after purchase
-                }
+
+                // Calculate total for payment options modal
+                const currentTotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+                paymentOptionsTotal.textContent = `₹${currentTotal}`;
+
+                // Show payment options modal
+                paymentOptionsModal.classList.remove("hidden");
+                paymentOptionsModal.classList.add("show");
+                paymentOptionsModal.querySelector('h3').focus(); // Focus on modal title for accessibility
             }
 
             // Show or hide mobile nav overlay
@@ -2009,7 +2166,7 @@ nav a:hover, button:hover {
                 userProfile.name = newName;
                 userProfile.email = newEmail;
                 userProfile.address = newAddress;
-                saveState();
+                saveState(); // <--- ADDED THIS LINE TO SAVE STATE
                 showNotification("Profile updated successfully!");
                 toggleEditMode(false); // Exit edit mode
                 loadDashboardData(); // Reload data to show updated values
@@ -2132,6 +2289,56 @@ nav a:hover, button:hover {
             function isMobileView() {
                 return window.innerWidth < 768;
             }
+
+            // Handle Cash on Delivery
+            function handleCashOnDelivery() {
+                const currentTotal = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+                confirmationMessage.innerHTML = `Your order for **₹${currentTotal}** has been successfully placed.`;
+                orderConfirmationOverlay.classList.remove("hidden");
+                orderConfirmationOverlay.classList.add("show");
+                orderConfirmationOverlay.querySelector('h3').focus(); // Focus for accessibility
+
+                // Clear cart and update state
+                cart = [];
+                saveState();
+                updateCartCount();
+            }
+
+            // Handle Digital Payment (G-Pay, Paytm, PhonePe)
+            function handleDigitalPayment(method) {
+                qrScannerOverlay.classList.remove("hidden");
+                qrScannerOverlay.classList.add("show");
+                qrScannerOverlay.querySelector('h3').focus(); // Focus for accessibility
+                qrCountdown.textContent = "30"; // Reset countdown
+
+                let timeLeft = 30;
+                countdownInterval = setInterval(() => {
+                    timeLeft--;
+                    qrCountdown.textContent = timeLeft;
+                    if (timeLeft <= 0) {
+                        clearInterval(countdownInterval);
+                        simulatePaymentSuccess();
+                    }
+                }, 1000);
+            }
+
+            // Simulate Payment Success (for QR code)
+            function simulatePaymentSuccess() {
+                clearInterval(countdownInterval); // Ensure countdown stops
+                qrScannerOverlay.classList.remove("show");
+                qrScannerOverlay.classList.add("hidden");
+
+                confirmationMessage.textContent = "Your payment was successful and your order has been confirmed!";
+                orderConfirmationOverlay.classList.remove("hidden");
+                orderConfirmationOverlay.classList.add("show");
+                orderConfirmationOverlay.querySelector('h3').focus(); // Focus for accessibility
+
+                // Clear cart and update state
+                cart = [];
+                saveState();
+                updateCartCount();
+            }
+
 
             // Bind all UI events
             function bindUIEvents() {
@@ -2273,6 +2480,47 @@ nav a:hover, button:hover {
                         }
                     }, true);
                  });
+
+                // Handle Payment Options Modal
+                cancelPaymentOptionsBtn.addEventListener("click", () => {
+                    paymentOptionsModal.classList.remove("show");
+                    paymentOptionsModal.classList.add("hidden");
+                    showNotification("Payment selection cancelled.", 3000);
+                });
+
+                paymentMethodBtns.forEach(button => {
+                    button.addEventListener("click", (e) => {
+                        const method = e.currentTarget.dataset.method;
+                        paymentOptionsModal.classList.remove("show");
+                        paymentOptionsModal.classList.add("hidden"); // Hide options modal
+
+                        if (method === "cod") {
+                            handleCashOnDelivery();
+                        } else {
+                            handleDigitalPayment(method);
+                        }
+                    });
+                });
+
+                // Event listener for "Payment Done (Simulated)" button
+                paymentDoneBtn.addEventListener("click", () => {
+                    simulatePaymentSuccess();
+                });
+
+                // Event listener for "Cancel" button on QR scanner
+                cancelQrScanBtn.addEventListener("click", () => {
+                    clearInterval(countdownInterval);
+                    qrScannerOverlay.classList.remove("show");
+                    qrScannerOverlay.classList.add("hidden");
+                    showNotification("Payment cancelled.", 3000);
+                });
+
+                // Event listener for "Continue Shopping" button on Order Confirmation
+                continueShoppingBtn.addEventListener("click", () => {
+                    orderConfirmationOverlay.classList.remove("show");
+                    orderConfirmationOverlay.classList.add("hidden");
+                    showSection(isLoggedIn ? "dresses" : "home"); // Redirect to product listing
+                });
             }
 
             // Entry point on page load
@@ -2337,12 +2585,14 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // === PAYMENT SIMULATION ===
-  const paymentForm = document.getElementById("paymentForm");
+  // This section is now largely superseded by the new payment flow,
+  // but keeping it here for completeness if other parts of the app rely on it.
+  const paymentForm = document.getElementById("paymentForm"); // This element is no longer in HTML
   if (paymentForm) {
     paymentForm.addEventListener("submit", (e) => {
       e.preventDefault();
       alert("✅ Payment Simulated Successfully!");
-      document.getElementById("paymentModal").classList.add("hidden");
+      // document.getElementById("paymentModal").classList.add("hidden"); // This element is no longer in HTML
     });
   }
 
@@ -2368,7 +2618,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <style>
   .hidden { display: none; }
-  #admin-dashboard, #paymentModal {
+  #admin-dashboard, #paymentModal { /* #paymentModal is no longer in HTML */
     background: #f0f0f0; padding: 1em; margin-top: 2em;
     border: 1px solid #ccc; border-radius: 6px;
   }
